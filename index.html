@@ -18,13 +18,14 @@
             <img src="./images/logo.png" alt="Capelo e diploma">
             <h1>Calculadora de médias</h1>
         </header>
-        <form>
-            <input type="text" name="" id="" placeholder="Nome da atividade" required>
+        <form id="form-atividade">
+            <input type="text" id="nome-atividade" placeholder="Nome da atividade" required>
 
             <!-- MSEdge corta placeholder="Nota da atividade" pra só "Nota" mas
             Firefox não 🤔, então cortei manualmente aqui pra caber nos 640px do
-            nosso form no Firefox também -->
-            <input type="number" name="" id="" placeholder="Nota" min="0" max="10" required>
+            nosso form no Firefox também. O step="any" é necessário para aceitar
+            números quebrados -->
+            <input type="number" id="nota-atividade" placeholder="Nota" min="0" max="10" step="any" required>
 
             <button type="submit">Adicionar +</button>
         </form>
@@ -36,22 +37,17 @@
                     <th>Aprovado?</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Atividade 1</td>
-                    <td>7</td>
-                    <td><img src="./images/aprovado.png" alt="Emoji festejando"></td>
-                </tr>
-            </tbody>
+            <tbody></tbody>
             <tfoot>
                 <tr>
                     <td>Média final</td>
-                    <td>7</td>
-                    <td><span class="resultado aprovado">Aprovado</span></td>
+                    <td id="media-final-valor">---</td>
+                    <td><span id="media-final-resultado" class="resultado">---</span></td>
                 </tr>
             </tfoot>
         </table>
     </div>
+    <script src="./main.js"></script>
 </body>
 
 </html>
