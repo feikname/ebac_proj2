@@ -60,6 +60,10 @@ form button {
     padding: 8px;
 }
 
+form button:hover {
+    background-color: #04ce47;
+}
+
 table {
     width: 100%;
 }
@@ -75,15 +79,11 @@ table td {
     text-align: center;
     font-size: 18px;
     padding: 16px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.1)
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1)
 }
 
 td#no-contacts {
     padding: 48px;
-}
-
-#btn-deletar {
-    background-color: red;
 }
 
 .hidden {
@@ -93,4 +93,16 @@ td#no-contacts {
 input.duped {
     color: red;
     border-bottom: 1px solid red;
+}
+
+/* Botão de excluir */
+td>button {
+    padding: 8px;
+    border: none;
+    background-color: red;
+    cursor: pointer;
+}
+
+td>button:hover {
+    background-color: rgb(252, 73, 73);
 }
