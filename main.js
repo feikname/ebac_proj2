@@ -1,80 +1,101 @@
-const form = document.getElementById("form-atividade")
-const imgAprovado = '<img src="./images/aprovado.png" alt="Emoji celebrando">'
-const imgReprovado = '<img src="./images/reprovado.png" alt="Emoji decepcionado">'
+const form = document.getElementById("form-adicionar-contato")
+const inputNome = document.getElementById("nome-contato")
+const inputTelefone = document.getElementById("telefone-contato")
 
-const atividades = []
-const notas = []
+const nomes = []
+const telefones = []
 
-const notaMinima = Number(prompt("Digite a nota mínima"))
-
-console.log(notaMinima)
-
-let linhas = ""
+let itensRenderizados = 0
 
 form.addEventListener("submit", function (e) {
     e.preventDefault()
 
-    adicionarLinha()
-    atualizarTabela()
-    atualizaMediaFinal()
+    if(adicionarLinha()) {
+        atualizarTabela()
+    }
 })
 
-// TODO: str.trim()
-function adicionarLinha() {
-    const inputNomeAtividade = document.getElementById("nome-atividade")
-    const inputNotaAtividade = document.getElementById("nota-atividade")
-
-    if (atividades.includes(inputNomeAtividade.value)) {
-        alert(`ERRO: A atividade ${inputNomeAtividade.value} já foi inserida`);
+inputNome.addEventListener("keyup", function() {
+    const nome=inputNome.value.trim();
+    if(nomes.includes(nome)) {
+        inputNome.classList.add("duped")
     } else {
-        atividades.push(inputNomeAtividade.value)
-        notas.push(Number(inputNotaAtividade.value))
-
-        const resultadoAprovacao = Number(inputNotaAtividade.value) >= notaMinima ? imgAprovado : imgReprovado
-
-        // OBS: talvez document.createElement("tr") e appendChild fossem mais
-        // apropriados aqui
-        let linha = "<tr>"
-        linha += `<td>${inputNomeAtividade.value}</td>`
-        linha += `<td>${inputNotaAtividade.value}</td>`
-        linha += `<td>${resultadoAprovacao}</td>`
-        linha += "</tr>"
-
-        linhas += linha
+        inputNome.classList.remove("duped")
     }
-    inputNomeAtividade.value = ""
-    inputNotaAtividade.value = ""
+})
+
+inputTelefone.addEventListener("keyup", function() {
+    const tel=inputTelefone.value.trim();
+    if(telefones.includes(tel)) {
+        inputTelefone.classList.add("duped")
+    } else {
+        inputTelefone.classList.remove("duped")
+    }
+})
+
+
+// let evtDeletarContato = function(e) {
+
+// }
+
+// function removerLinha(i) {
+
+// }
+
+// TODO: Adicionar funcionalidade de deleção
+// true: nova linha adicionada
+// false: nenhuma linha adiciona
+function adicionarLinha() {
+    let retValue = false
+
+    const nome=inputNome.value.trim();
+    const tel=inputTelefone.value.trim();
+
+    if (nomes.includes(nome)) {
+        alert(`ERRO: Já existe um contato com o nome "${nome}" na sua agenda!`);
+    } else if (telefones.includes(tel)) {
+        alert(`ERRO: Já existe um contato com o número "${tel}" na sua agenda!`);
+    } else {
+        nomes.push(nome)
+        telefones.push(tel)
+
+        retValue = true
+    }
+
+    inputNome.value = ""
+    inputTelefone.value = ""
+
+    return retValue
 }
 
 function atualizarTabela() {
-    const corpoTabela = document.querySelector("tbody")
-    corpoTabela.innerHTML = linhas
-}
+    const itensExistentes = nomes.length;
 
-function calcularMediaFinal() {
-    let soma = 0
-    for (let i = 0; i < notas.length; i++) {
-        soma += notas[i]
+    if(itensRenderizados == 0 && itensExistentes==1) {
+        document.getElementById("no-contacts").classList.add("hidden")
+    }
+    if(itensRenderizados == 1 && itensExistentes==0) {
+        document.getElementById("no-contacts").classList.remove("hidden")
     }
 
-    return soma / notas.length
-}
+    if(itensRenderizados == itensExistentes) {
+        console.warn("atualizarTabela() chamado sem nada para atualizar")
+        return
+    }
 
-function atualizaMediaFinal() {
-    const mediaFinal = calcularMediaFinal()
+    if(itensRenderizados < itensExistentes) {
+        let tr = document.createElement("tr")
+        let tr_td_nome = document.createElement("td")
+        let tr_td_tel = document.createElement("td")
+    
+        tr_td_nome.innerText=nomes[nomes.length-1]
+        tr_td_tel.innerText=telefones[telefones.length-1]
+    
+        tr.appendChild(tr_td_nome)
+        tr.appendChild(tr_td_tel)
+    
+        document.querySelector("tbody").appendChild(tr)
 
-    document.getElementById("media-final-valor").innerHTML = mediaFinal.toFixed(2)
-
-    const resultadoMediaFinal = document.getElementById("media-final-resultado")
-
-    if (mediaFinal >= notaMinima) {
-        resultadoMediaFinal.innerHTML = "Aprovado"
-        resultadoMediaFinal.classList.remove("reprovado")
-        resultadoMediaFinal.classList.add("aprovado")
-    } else {
-        resultadoMediaFinal.innerHTML = "Reprovado"
-        resultadoMediaFinal.classList.remove("aprovado")
-        resultadoMediaFinal.classList.add("reprovado")
+        itensRenderizados++;
     }
 }
-

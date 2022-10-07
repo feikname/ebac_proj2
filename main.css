@@ -6,14 +6,14 @@
 }
 
 body {
-    padding-top: 100px;
+    padding-top: 60px;
     background-color: #e7e7e7;
 }
 
 header {
     display: flex;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 header h1 {
@@ -34,10 +34,10 @@ header img {
 
 form {
     display: flex;
-    max-width: 640px;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 56px;
+    margin-bottom: 60px;
+    max-width: 760px;
 }
 
 form input {
@@ -46,15 +46,9 @@ form input {
     border: none;
     border-bottom: 2px solid black;
     padding: 8px;
+    max-width: 300px;
 }
 
-/* Necessário p/ ficar bonito no Firefox pois o segundo campo não se ajusta
-automaticamente de acordo com o tamanho do placeholder que nem no motor Chromium
-por algum motivo, em vez disso todos inputs assumem o mesmo tamanho e aí não
-cabe tudo na form */
-form input:nth-child(2) {
-    max-width: 100px;
-}
 
 form button {
     background-color: #009432;
@@ -84,22 +78,19 @@ table td {
     border-bottom: 1px solid rgba(0,0,0,0.1)
 }
 
-table td img {
-    height: 30px;
+td#no-contacts {
+    padding: 48px;
 }
 
-.resultado {
-    padding: 8px;
-    font-weight: bold;
-    color: #fff;
-    background-color: black;
-    border-radius: 3px;
-}
-
-.aprovado {
-    background-color: #009432;
-}
-
-.reprovado {
+#btn-deletar {
     background-color: red;
+}
+
+.hidden {
+    display: none;
+}
+
+input.duped {
+    color: red;
+    border-bottom: 1px solid red;
 }

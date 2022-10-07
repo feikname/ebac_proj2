@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de médias</title>
+    <title>Agenda de contatos</title>
     <link rel="stylesheet" href="./main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,37 +15,31 @@
 <body>
     <div class="container">
         <header>
+            <!-- TODO: Trocar logotipo -->
             <img src="./images/logo.png" alt="Capelo e diploma">
-            <h1>Calculadora de médias</h1>
+            <h1>Agenda de contatos</h1>
         </header>
-        <form id="form-atividade">
-            <input type="text" id="nome-atividade" placeholder="Nome da atividade" required>
+        <form id="form-adicionar-contato">
+            <input type="text" id="nome-contato" placeholder="Nome" required>
 
-            <!-- MSEdge corta placeholder="Nota da atividade" pra só "Nota" mas
-            Firefox não 🤔, então cortei manualmente aqui pra caber nos 640px do
-            nosso form no Firefox também. O step="any" é necessário para aceitar
-            números quebrados -->
-            <input type="number" id="nota-atividade" placeholder="Nota" min="0" max="10" step="any" required>
+            <input type="tel" id="telefone-contato" placeholder="Telefone" required>
 
             <button type="submit">Adicionar +</button>
         </form>
         <table cellspacing="0">
             <thead>
                 <tr>
-                    <th>Nome da atividade</th>
-                    <th>Nota da atividade</th>
-                    <th>Aprovado?</th>
+                    <th>Nome do contato</th>
+                    <th>Telefone do contato</th>
                 </tr>
             </thead>
-            <tbody></tbody>
-            <tfoot>
+            <tbody>
                 <tr>
-                    <td>Média final</td>
-                    <td id="media-final-valor">---</td>
-                    <td><span id="media-final-resultado" class="resultado">---</span></td>
+                    <td id="no-contacts" colspan="2">Ainda não há contatos aqui.</td>
                 </tr>
-            </tfoot>
+            </tbody>
         </table>
+        <br><br>Número de contatos: <span id="numero-contatos">0</span>
     </div>
     <script src="./main.js"></script>
 </body>
